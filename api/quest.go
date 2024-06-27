@@ -718,6 +718,10 @@ func checkLikeTweet(ctx context.Context, mission *model.Mission, username string
 	apiKey := GetUToolKeyByRoundRobin()
 	option := &swagger.TwitterGetTweesApiToolsApiFavoritersV2UsingGETOpts{}
 
+	if tweetId == "" {
+		return errors.New("missing tweet id")
+	}
+
 	result, _, err := client.TwitterGetTweesApiToolsApi.FavoritersV2UsingGET(ctx, apiKey, tweetId, option)
 	if err != nil {
 		log.Errorf("GetListByUserIdOrScreenNameUsingGET: %v", err)
@@ -807,6 +811,11 @@ func checkReTweet(ctx context.Context, mission *model.Mission, username string, 
 	}
 
 	tweetId := openURL.Query().Get("tweet_id")
+
+	if tweetId == "" {
+		return errors.New("missing tweet id")
+	}
+
 	result, _, err := client.TwitterGetTweesApiToolsApi.RetweetersV2UsingGET(ctx, apiKey, tweetId, option)
 	if err != nil {
 		log.Errorf("GetListByUserIdOrScreenNameUsingGET: %v", err)
@@ -874,21 +883,6 @@ func checkQuoteTweet(ctx context.Context, mission *model.Mission, username strin
 		return err
 	}
 
-	//openURL, err := url.Parse(mission.OpenUrl)
-	//if err != nil {
-	//	log.Errorf("Parse OPEN URL: %v", err)
-	//	return err
-	//}
-
-	//fmt.Println(openURL)
-	//openURLPaths := strings.Split(openURL.Path, "/")
-	//
-	//if len(openURLPaths) != 4 {
-	//	log.Errorf("Invalid URL: %v", err)
-	//	return errors.New("invalid post url")
-	//}
-	//tweetId := openURLPaths[len(openURLPaths)-1]
-
 	client := swagger.NewAPIClient(swagger.NewConfiguration())
 	twitterLink, err := dao.GetUserTwitterLink(ctx, username, mission.ID, carbon.Now().StartOfDay().String())
 	if err != nil {
@@ -910,6 +904,10 @@ func checkQuoteTweet(ctx context.Context, mission *model.Mission, username strin
 	}
 
 	replyId := strings.TrimSpace(paths[len(paths)-1])
+
+	if replyId == "" {
+		return errors.New("missing tweet id")
+	}
 
 	apiKey := GetUToolKeyByRoundRobin()
 	option := &swagger.TwitterGetTweesApiToolsApiTweetTimelineUsingGETOpts{}
@@ -1013,6 +1011,10 @@ func checkPostTweet(ctx context.Context, mission *model.Mission, username string
 	}
 
 	replyId := strings.TrimSpace(paths[len(paths)-1])
+
+	if replyId == "" {
+		return errors.New("missing tweet id")
+	}
 
 	apiKey := GetUToolKeyByRoundRobin()
 	option := &swagger.TwitterGetTweesApiToolsApiTweetTimelineUsingGETOpts{}
