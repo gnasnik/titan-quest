@@ -30,7 +30,7 @@ var (
 
 func InitBot() {
 	pref := tele.Settings{
-		Token:  config.Cfg.TelegramBotToken,
+		Token:  config.Cfg.TelegramBotTestToken,
 		Poller: &tele.LongPoller{Timeout: 10 * time.Second},
 	}
 

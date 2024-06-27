@@ -4,6 +4,7 @@ go 1.21
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
+	github.com/TestsLing/aj-captcha-go v0.0.0-20240518053305-e20480a6396a
 	github.com/antihax/optional v1.0.0
 	github.com/appleboy/gin-jwt/v2 v2.9.0
 	github.com/bwmarrin/discordgo v0.28.1
@@ -39,7 +40,6 @@ require (
 	cosmossdk.io/store v1.1.0 // indirect
 	cosmossdk.io/x/tx v0.13.3 // indirect
 	github.com/DataDog/zstd v1.5.5 // indirect
-	github.com/TestsLing/aj-captcha-go v0.0.0-20240518053305-e20480a6396a // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.5 // indirect

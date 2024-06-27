@@ -125,8 +125,15 @@ func TelegramBindHandler(c *gin.Context) {
 	values := c.Request.URL.Query()
 	values.Del("hash")
 
+	var botToken string
+	if strings.Contains(c.Request.URL.Host, "www") {
+		botToken = config.Cfg.TelegramBotSparkToken
+	} else {
+		botToken = config.Cfg.TelegramBotTestToken
+	}
+
 	dataToCheck, _ := url.QueryUnescape(strings.ReplaceAll(values.Encode(), "&", "\n"))
-	secretKey := sha256.Sum256([]byte(config.Cfg.TelegramBotToken))
+	secretKey := sha256.Sum256([]byte(botToken))
 	if hex.EncodeToString(hmacHash([]byte(dataToCheck), secretKey[:])) != hash {
 		c.JSON(http.StatusOK, respErrorCode(errorsx.InvalidParams, c))
 		return

@@ -18,7 +18,8 @@ type Config struct {
 	OfficialTwitterUserId    int64
 	OfficialTelegramGroupId  int64
 	DiscordBotToken          string
-	TelegramBotToken         string
+	TelegramBotTestToken     string
+	TelegramBotSparkToken    string
 	TelegramBotID            string
 	TelegramCallback         string
 	RedirectURI              string
